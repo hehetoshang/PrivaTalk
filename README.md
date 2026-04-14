@@ -1,57 +1,103 @@
-# React + TypeScript + Vite
+# 【Code with SOLO】15分钟搭建安全的文本加密解密工具，支持多人端对端加密
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 摘要
 
-Currently, two official plugins are available:
+使用 TRAE SOLO 快速构建了一个安全的文本加密解密工具，支持密码加密和端对端加密两种模式，实现了好友管理、自动密钥存储、响应式布局等功能，解决了日常通信中敏感信息传输的安全问题。
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 背景
 
-## Expanding the ESLint configuration
+作为一名前端开发工程师，我经常需要在不安全的通信渠道（如微信、邮件）中传输敏感信息，传统的加密工具要么操作复杂，要么依赖第三方服务，存在安全隐患。我希望创建一个本地运行、操作简单、安全可靠的加密工具。
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 实践过程
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### 1. 任务拆解
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- 核心功能：文本加密解密
+- 加密模式：密码加密（AES-GCM）和端对端加密（RSA-OAEP）
+- 用户体验：友好的界面、响应式设计、错误提示
+- 高级功能：好友管理、密钥自动存储、多人加密
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 2. 使用的 SOLO 能力
 
-export default tseslint.config({
-  extends: [
-    // other configs...
-    // Enable lint rules for React
-    reactX.configs['recommended-typescript'],
-    // Enable lint rules for React DOM
-    reactDom.configs.recommended,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- 代码生成：快速生成 React 组件和工具函数
+- 技术选型：推荐使用 Web Crypto API 实现加密
+- 问题解决：帮助修复剪贴板API权限和Base64编码错误
+- 架构设计：指导项目结构和组件拆分
+
+### 3. 关键操作过程
+
+1. **初始化项目**：使用 Vite 创建 React + TypeScript 项目
+2. **核心功能实现**：
+   - 生成 RSA 密钥对
+   - 实现密码加密和解密
+   - 实现端对端加密和解密
+3. **用户界面开发**：
+   - 创建响应式布局
+   - 实现好友管理功能
+   - 添加错误处理和提示
+4. **问题修复**：
+   - 解决剪贴板API权限问题
+   - 修复Base64编码错误
+   - 优化密钥存储机制
+
+### 4. 踩过的坑
+
+- **剪贴板API权限**：在 iframe 中使用时被阻止，通过添加降级方案解决
+- **Base64编码错误**：处理不同格式的PEM公钥，添加标准化处理
+- **响应式布局**：小屏幕设备的布局调整，确保用户体验一致性
+
+## 成果展示
+
+### 界面展示
+
+![密码加密模式-PC|690x402](https://forum.trae.cn/uploads/short-url/6gqTouyQjOaLrk0ixDf3I9exm6R.jpeg?dl=1)
+
+![密码加密模式-移动设备|174x500](https://forum.trae.cn/uploads/short-url/os1SBggUbnZKQFX539dopGQwRni.jpeg?dl=1)
+
+![端对端加密模式-PC|374x500](https://forum.trae.cn/uploads/short-url/13t4dzHHoQ4N7yu6gbCvEMrfQeL.jpeg?dl=1)
+
+![端对端加密模式-移动设备|115x500](https://forum.trae.cn/uploads/short-url/13FK0VbD8SrKRCSOYmaCDpLqHvF.jpeg?dl=1)
+
+### 核心功能
+
+1. **密码加密**：使用 AES-GCM 算法，输入密码即可加密/解密
+2. **端对端加密**：使用 RSA-OAEP 算法，生成公钥/私钥对
+3. **好友管理**：添加、编辑、删除好友，自动使用好友公钥加密
+4. **响应式设计**：适配桌面端和移动端
+5. **密钥存储**：自动保存到 cookie，无需重复生成
+
+### 技术实现
+
+- **前端框架**：React 18 + TypeScript
+- **加密库**：Web Crypto API（浏览器内置）
+- **样式**：Tailwind CSS
+- **构建工具**：Vite
+
+## 效果与总结
+
+### 提效情况
+
+- **开发时间**：传统开发需要 4-6 小时，使用 SOLO 仅需 15 分钟
+- **操作效率**：用户操作步骤减少 50%，加密解密过程更加直观
+- **安全保障**：本地加密，无需依赖第三方服务，数据更安全
+
+### SOLO 的作用
+
+- **代码生成**：快速生成基础组件和工具函数，减少重复工作
+- **问题解决**：提供针对性的错误修复方案，节省调试时间
+- **架构指导**：帮助设计清晰的项目结构，提高代码可维护性
+
+### 可复用的方法
+
+1. **模块化设计**：将加密逻辑和 UI 分离，便于扩展
+2. **错误处理**：统一的错误处理机制，提供友好的用户提示
+3. **响应式布局**：使用 Tailwind CSS 实现多设备适配
+4. **本地存储**：使用 cookie 存储密钥，平衡安全性和便利性
+
+## 项目价值
+
+这个工具不仅解决了个人敏感信息传输的安全问题，也可以作为团队内部的安全通信工具，避免使用第三方加密服务带来的风险。通过 SOLO 的帮助，实现了从想法到成品的快速落地，展示了 AI 辅助开发的强大能力。
+
+***
+
+**文章链接**：<https://forum.trae.cn/t/topic/8971/1>
